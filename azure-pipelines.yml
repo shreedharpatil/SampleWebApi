@@ -24,12 +24,11 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- powershell: gci env:* | sort-object name | Format-Table -AutoSize | Out-File $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt
-
-- task: PublishBuildArtifacts@1
+- task: AzureRmWebAppDeployment@3
   inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: drop
+    azureSubscription: 'Free Trial (5c31a562-f61e-4779-86e7-616ab79c38c8)'
+    WebAppName: 'SampleWebApi1'
+    Package: $(System.ArtifactsDirectory)/**/*.zip
     
 - task: VSTest@2
   inputs:
