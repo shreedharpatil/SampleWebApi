@@ -24,11 +24,15 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: AzureRmWebAppDeployment@3
+- powershell: .\build.ps1
+- task: CopyFiles@2
   inputs:
-    azureSubscription: 'Free Trial (5c31a562-f61e-4779-86e7-616ab79c38c8)'
-    WebAppName: 'SampleWebApi1'
-    Package: $(System.ArtifactsDirectory)/**/*.zip
+    contents: _buildOutput\**
+    targetFolder: $(Build.ArtifactStagingDirectory)
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: MyBuildOutputs
     
 - task: VSTest@2
   inputs:
