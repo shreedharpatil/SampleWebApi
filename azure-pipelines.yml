@@ -24,7 +24,6 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- powershell: .\build.ps1
 - task: CopyFiles@2
   inputs:
     contents: _buildOutput\**
