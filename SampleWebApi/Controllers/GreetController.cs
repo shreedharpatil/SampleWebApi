@@ -6,8 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SampleWebApi.Controllers
 {
-    public class GreetController : Controller
+[Route("api/[controller]")]
+    [ApiController]
+    public class GreetController : ControllerBase
     {
+    [HttpGet]
         public string Index()
         {
             return "Hello! Welcome to azure devops...";
